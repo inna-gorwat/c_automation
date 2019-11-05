@@ -1,20 +1,18 @@
-using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using w3schoollAutomation;
-
+using w3schoollAutomation.Pages.HTML;
 
 namespace w3schoollTests
 {
     [TestFixture]
     public class HtmlTutorialTests : BaseUITest
     {
-        private IWebDriver driver;
+        private HTMLTutorialPage page = new HTMLTutorialPage();
 
         public override void InitTestPage()
         {
-            driver = Driver.Instance;
-            Driver.Instance.Navigate().GoToUrl("https://www.w3schools.com/");
+            page.Init();
         }
 
 
@@ -28,14 +26,7 @@ namespace w3schoollTests
             - Verify "HTML Tutorial" page opened
              */
 
-            //Find link on page
-            IWebElement button = driver.FindElement(By.CssSelector("#mySidenav > div > a:nth-child(2)"));
-            //Check  "Learn HTML" text on link
-            Assert.AreEqual("Learn HTML", button.Text);
-            //Click on link
-            button.Click();
-            //Check that page has correct title
-            Assert.AreEqual("HTML Tutorial", driver.Title);
+            Assert.True(page.isAt, "Html tutorial page not opened");
         }
 
 
@@ -48,16 +39,11 @@ namespace w3schoollTests
             - Click on "Next >" button
             - Verify HTML Introduction  page opened
              */
-            //click on link Learn HTML
-            driver.FindElement(By.LinkText("Learn HTML")).Click();
-            //Find Next button
-            IWebElement nextButton = driver.FindElement(By.CssSelector("#main > div.nextprev > a.w3-right.w3-btn"));
-            //Click next button
-            nextButton.Click();
+            page.ClickNext();
             //Verify title correct
-            Assert.AreEqual("Introduction to HTML", driver.Title);
+            Assert.AreEqual("Introduction to HTML", page.GetTitle());
             //Verify main page header correct
-            Assert.AreEqual("HTML Introduction", driver.FindElement(By.CssSelector("#main > h1")).Text);
+            Assert.AreEqual("HTML Introduction", page.GetPageHeader());
         }
 
         [Test]
@@ -69,13 +55,9 @@ namespace w3schoollTests
             - Click on "< Home" button
             - Verify Home page opened
              */
-            driver.FindElement(By.LinkText("Learn HTML")).Click();
-            //Find Next button
-            IWebElement nextButton = driver.FindElement(By.CssSelector("#main > div.nextprev > a.w3-left.w3-btn"));
-            //Click next button
-            nextButton.Click();
+            page.ClickHome();
             //Verify title correct
-            Assert.AreEqual("W3Schools Online Web Tutorials", driver.Title);
+            Assert.AreEqual("W3Schools Online Web Tutorials", page.GetTitle());
 
         }
     }

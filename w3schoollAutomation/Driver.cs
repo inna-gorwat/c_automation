@@ -12,7 +12,8 @@ namespace w3schoollAutomation
 
         public static void Initialize()
         {
-            InitFireforDriver();
+            // InitFireforDriver();
+            InitChromeDriver();
             Instance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             Instance.Manage().Window.Maximize();
         }
