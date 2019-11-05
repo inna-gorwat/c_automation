@@ -1,53 +1,20 @@
 using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using w3schoollAutomation;
+
 
 namespace w3schoollTests
 {
     [TestFixture]
-    public class HtmlTutorialTests
+    public class HtmlTutorialTests : BaseUITest
     {
         private IWebDriver driver;
 
-        [OneTimeSetUp]
-        public void Init()
+        public override void InitTestPage()
         {
-            //Give the path of the firefox driver geckodriver.exe    
-            FirefoxDriverService service = FirefoxDriverService.CreateDefaultService(@"c:\tools", "geckodriver.exe");
-
-            //Give the path of the Firefox Browser        
-            service.FirefoxBinaryPath = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-
-            //inot driver varibale
-            driver = new FirefoxDriver(service);
-
-            // driver = new ChromeDriver(@"c:\tools");
-
-            //added ImplicitWait to webdriver, webdriver will wailt 30 seconds for page loading etc.
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-
-            //For maximize browser
-            driver.Manage().Window.Maximize();
-            //Webdriver will open this URL
-            driver.Url = "https://www.w3schools.com/default.asp";
-        }
-
-        //this method will esecuted before each testcases
-        [SetUp]
-        public void SetupTest()
-        {
-
-            driver.Navigate().GoToUrl("https://www.w3schools.com/default.asp");
-        }
-
-
-        //This method will executed after each test cases
-        [OneTimeTearDown]
-        public void TeardownTest()
-        {
-            //closing browser
-            driver.Quit();
+            driver = Driver.Instance;
+            Driver.Instance.Navigate().GoToUrl("https://www.w3schools.com/");
         }
 
 
@@ -81,7 +48,7 @@ namespace w3schoollTests
             - Click on "Next >" button
             - Verify HTML Introduction  page opened
              */
-             //click on link Learn HTML
+            //click on link Learn HTML
             driver.FindElement(By.LinkText("Learn HTML")).Click();
             //Find Next button
             IWebElement nextButton = driver.FindElement(By.CssSelector("#main > div.nextprev > a.w3-right.w3-btn"));
@@ -109,7 +76,7 @@ namespace w3schoollTests
             nextButton.Click();
             //Verify title correct
             Assert.AreEqual("W3Schools Online Web Tutorials", driver.Title);
-            
+
         }
     }
 }
