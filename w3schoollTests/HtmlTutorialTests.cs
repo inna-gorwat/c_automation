@@ -90,7 +90,7 @@ namespace w3schoollTests
             //Verify title correct
             Assert.AreEqual("Introduction to HTML", driver.Title);
             //Verify main page header correct
-            Assert.AreEqual("Introduction to HTML", driver.FindElement(By.CssSelector("#main > h1 > span")).Text);
+            Assert.AreEqual("HTML Introduction", driver.FindElement(By.CssSelector("#main > h1")).Text);
         }
 
         [Test]
