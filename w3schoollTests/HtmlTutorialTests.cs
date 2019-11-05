@@ -8,10 +8,10 @@ namespace w3schoollTests
     [TestFixture]
     public class HtmlTutorialTests
     {
-          private IWebDriver driver;
+        private IWebDriver driver;
 
         [OneTimeSetUp]
-         public void Init()
+        public void Init()
         {
             //Give the path of the firefox driver geckodriver.exe    
             FirefoxDriverService service = FirefoxDriverService.CreateDefaultService(@"c:\tools", "geckodriver.exe");
@@ -37,7 +37,7 @@ namespace w3schoollTests
         [SetUp]
         public void SetupTest()
         {
-           
+
             driver.Navigate().GoToUrl("https://www.w3schools.com/default.asp");
         }
 
@@ -62,13 +62,13 @@ namespace w3schoollTests
              */
 
             //Find link on page
-           
+            IWebElement button = driver.FindElement(By.CssSelector("#mySidenav > div > a:nth-child(2)"));
             //Check  "Learn HTML" text on link
-
+            Assert.AreEqual("Learn HTML", button.Text);
             //Click on link
-
+            button.Click();
             //Check that page has correct title
-
+            Assert.AreEqual("HTML Tutorial", driver.Title);
         }
 
 
@@ -81,7 +81,16 @@ namespace w3schoollTests
             - Click on "Next >" button
             - Verify HTML Introduction  page opened
              */
-            
+             //click on link Learn HTML
+            driver.FindElement(By.LinkText("Learn HTML")).Click();
+            //Find Next button
+            IWebElement nextButton = driver.FindElement(By.CssSelector("#main > div.nextprev > a.w3-right.w3-btn"));
+            //Click next button
+            nextButton.Click();
+            //Verify title correct
+            Assert.AreEqual("Introduction to HTML", driver.Title);
+            //Verify main page header correct
+            Assert.AreEqual("Introduction to HTML", driver.FindElement(By.CssSelector("#main > h1 > span")).Text);
         }
 
         [Test]
@@ -93,6 +102,13 @@ namespace w3schoollTests
             - Click on "< Home" button
             - Verify Home page opened
              */
+            driver.FindElement(By.LinkText("Learn HTML")).Click();
+            //Find Next button
+            IWebElement nextButton = driver.FindElement(By.CssSelector("#main > div.nextprev > a.w3-left.w3-btn"));
+            //Click next button
+            nextButton.Click();
+            //Verify title correct
+            Assert.AreEqual("W3Schools Online Web Tutorials", driver.Title);
             
         }
     }
