@@ -104,9 +104,9 @@ namespace w3schoollTests
              */
             driver.FindElement(By.LinkText("Learn HTML")).Click();
             //Find Next button
-            IWebElement nextButton = driver.FindElement(By.CssSelector("#main > div.nextprev > a.w3-left.w3-btn"));
+            IWebElement homeButton = driver.FindElement(By.CssSelector("#main > div.nextprev > a.w3-left.w3-btn"));
             //Click next button
-            nextButton.Click();
+            homeButton.Click();
             //Verify title correct
             Assert.AreEqual("W3Schools Online Web Tutorials", driver.Title);
             
