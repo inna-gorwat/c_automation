@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 namespace w3schoollAutomation.Pages
 {
     public abstract class W3SchoolsPage<T> : IW3SchollPage
-
     {
         public void OpenPage(string LinkText)
         {

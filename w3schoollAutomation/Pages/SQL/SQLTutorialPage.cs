@@ -14,13 +14,29 @@ namespace w3schoollAutomation.Pages.SQL
             }
         }
 
+        private IWebElement PageHeader
+        {
+            get
+            {
+                return Driver.Instance.FindElement(By.CssSelector("#main > h1"));
+            }
+        }
+
+        private IWebElement RunSQLButton
+        {
+            get
+            {
+                return Driver.Instance.FindElement(By.CssSelector("#main > div.w3-example > a"));
+            }
+        }
+
         public string GetPageHeader(){
-          return Driver.Instance.FindElement(By.CssSelector("#main > h1")).Text;
+          return PageHeader.Text;
         }
 
         public SqlEditorPage OpenSqlEditor()
         {
-            Driver.Instance.FindElement(By.CssSelector("#main > div.w3-example > a")).Click();
+            RunSQLButton.Click();
             Driver.Instance.SwitchTo().Window(Driver.Instance.WindowHandles[1]);
             return new SqlEditorPage();
         }
