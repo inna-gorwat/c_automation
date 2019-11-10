@@ -55,7 +55,9 @@ namespace w3schoollTests
             - Click on "< Home" button
             - Verify Home page opened
              */
+
             page.ClickHome();
+
             //Verify title correct
             Assert.AreEqual("W3Schools Online Web Tutorials", page.GetTitle());
 
