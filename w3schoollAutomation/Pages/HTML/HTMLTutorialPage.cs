@@ -23,6 +23,12 @@ namespace w3schoollAutomation.Pages.HTML
             return this;
         }
 
+        public HTMLTutorialPage ClikPrevious()
+        {
+            return this;
+        }
+
+
         public string GetTitle()
         {
             return Driver.Instance.Title;
@@ -39,8 +45,8 @@ namespace w3schoollAutomation.Pages.HTML
         {
             get
             {
-                IWebElement SQLTutorialLink = Driver.Instance.FindElements(By.CssSelector("#main > h1"))[0];
-                return Driver.Instance.Title.Equals("HTML Tutorial") && SQLTutorialLink.Text.Equals("HTML Tutorial");
+                return GetTitle()
+                .Equals("HTML Tutorial") && GetPageHeader().Equals("HTML Tutorial");
             }
         }
     }
