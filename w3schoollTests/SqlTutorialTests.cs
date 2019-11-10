@@ -1,49 +1,22 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using w3schoollAutomation;
 
 namespace w3schoollTests
 {
 
     [TestFixture]
-    class SqlTutorialTests
+    class SqlTutorialTests : BaseUITest
     {
         //private variable to use webdriver in tests
         private IWebDriver driver;
 
-        //this method will esecuted before each testcases
-        [SetUp]
-        public void SetupTest()
+
+        public override void InitTestPage()
         {
-            //Give the path of the firefox driver geckodriver.exe    
-            FirefoxDriverService service = FirefoxDriverService.CreateDefaultService(@"c:\tools", "geckodriver.exe");
-
-            //Give the path of the Firefox Browser        
-            service.FirefoxBinaryPath = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-
-            //inot driver varibale
-            driver = new FirefoxDriver(service);
-
-            // driver = new ChromeDriver(@"c:\tools");
-
-            //added ImplicitWait to webdriver, webdriver will wailt 30 seconds for page loading etc.
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-
-            //For maximize browser
-            driver.Manage().Window.Maximize();
-
-            //Webdriver will open this URL
-            driver.Url = "https://www.w3schools.com/default.asp";
-        }
-
-
-        //This method will executed after each test cases
-        [TearDown]
-        public void TeardownTest()
-        {
-            //closing browser
-            driver.Quit();
+            driver = Driver.Instance;
+            Driver.Instance.Navigate().GoToUrl("https://www.w3schools.com/");
         }
 
 
